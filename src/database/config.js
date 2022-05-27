@@ -1,13 +1,20 @@
+
+require('dotenv').config();
 const pgp = require('pg-promise')();
 
 const DEV_CONFIG = {
-	host: 'localhost',
-	port: '5432',
-	database: 'blogs_db',
-	user: 'postgres',
-	password: '0001'
+	host: process.env.PG_HOST,
+	port: process.env.PG_PORT,
+	database: process.env.PG_DATABASE,
+	user: process.env.PG_USER,
+	password: process.env.PG_PASSWORD
 };
 
-const db = pgp(DEV_CONFIG);
+const PRO_CONFIG = {
+	connectionString: process.env.DATABASE_URL, // heroku database string
+	ssl: { rejectUnauthorized: false }
+};
+
+const db = pgp(process.env.NODE_ENV === 'production' ? PRO_CONFIG : DEV_CONFIG);
 
 module.exports = db;
