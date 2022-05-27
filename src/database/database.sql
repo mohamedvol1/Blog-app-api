@@ -10,4 +10,4 @@ CREATE TABLE public.blogs (
 ALTER TABLE
   public.blogs
 ADD
-  CONSTRAINT blogs_pkey PRIMARY KEY (blog_id)
+  CONSTRAINT blogs_pkey PRIMARY KEY (blog_id);
